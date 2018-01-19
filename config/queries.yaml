@@ -1,0 +1,7 @@
+services:
+
+    domain_query:
+        class: App\Query\DomainQuery
+        arguments:
+            $connection: '@database_connection'
+        public: true
