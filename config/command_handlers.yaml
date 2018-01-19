@@ -1,1 +1,8 @@
 services:
+    add_domain_handler:
+        class: App\Application\Command\Handler\AddDomainHandler
+        arguments:
+            $connection: '@database_connection'
+        tags:
+            - { name: tactician.handler, command: App\Application\Command\AddDomain }
+        public: true

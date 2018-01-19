@@ -1,10 +1,11 @@
 <?php
 namespace App\Controller;
 
-use App\Application\Command\AddDomain;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use App\Application\Command\AddDomain;
 
 class TestController extends Controller
 {
@@ -24,11 +25,14 @@ class TestController extends Controller
     /**
      * @Route("/add")
      */
-    public function doSomething()
+    public function addDomain()
     {
-        $domain = new AddDomain('www.name' . rand(100000,999999), rand(1,100));
+        $domain = new AddDomain([
+            'name' => 'www.name' . rand(100000,999999) . '.com',
+            'registerId' => rand(1,100)
+        ]);
 
-
+        $this->container->get('add_domain_handler')->handle($domain);
 
         //return $this->redirectToRoute('list_all');
         return $this->forward('App\Controller\TestController::listAll', []);
