@@ -2,33 +2,24 @@
 namespace App\Application\Command\Handler;
 
 use App\Application\Command\AddDomain;
-use Doctrine\DBAL\Connection;
-use Ramsey\Uuid\Uuid;
+use App\Domain\DomainRepository;
+
 
 class AddDomainHandler
 {
-    private $connection;
+    private $domainRepository;
 
-    public function __construct(Connection $connection)
+    public function __construct(DomainRepository $domainRepository)
     {
-        $this->connection = $connection;
+        $this->domainRepository = $domainRepository;
     }
 
     public function handle(AddDomain $addDomain)
     {
-        $payload = $addDomain->payload();
-        $domainName = $payload['name'];
-        $registerId = $payload['registerId'];
-        $id = Uuid::uuid1()->getHex();
-
-        $stmt = $this->connection->prepare("INSERT INTO `domain` (`id`, `name`, `group_id`) 
-            VALUES (:Id, :Name, :GroupId) 
-            ON DUPLICATE KEY UPDATE `name` = :Name, `group_id` = :GroupId");
-        $stmt->bindValue('Id', $id);
-        $stmt->bindValue('Name', $domainName);
-        $stmt->bindValue('GroupId', $registerId);
-        $stmt->execute();
-
-        echo "$domainName  ---  $registerId --- $id";
+        $this->domainRepository->save(
+            $addDomain->getId(),
+            $addDomain->getName(),
+            $addDomain->getGroupId()
+        );
     }
 }

@@ -1,0 +1,44 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+    <h1>Test</h1>
+    <h3>Repository: {{ repo }}</h3>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Group ID</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        {% for domain in domains %}
+
+            <tr>
+                <td>{{ domain.id }}</td>
+                <td>{{ domain.name }}</td>
+                <td>{{ domain.group_id }}</td>
+                <td>
+                    <a href="{{ path('delete_id', {id: domain.id}) }}">Delete</a>
+                </td>
+                <td>
+                    <a href="{{ path('change_id', {id: domain.id}) }}">Random change</a>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="{{ path('add_domain') }}">Random add</a></td>
+            <td><a href="{{ path('modify_all') }}">Random modify all</a></td>
+        </tr>
+    </table>
+
+    </body>
+</html>

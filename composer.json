@@ -3,7 +3,9 @@
     "license": "proprietary",
     "require": {
         "php": "^7.0.8",
+        "league/tactician": "^1.0",
         "league/tactician-bundle": "^1.1",
+        "league/tactician-doctrine": "^1.1",
         "ramsey/uuid": "^3.7",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",
@@ -17,9 +19,11 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
+        "symfony/debug": "^4.0",
         "symfony/dotenv": "^4.0",
         "symfony/phpunit-bridge": "^4.0",
-        "symfony/var-dumper": "^4.0"
+        "symfony/var-dumper": "^4.0",
+        "symfony/web-profiler-bundle": "^4.0"
     },
     "config": {
         "preferred-install": {

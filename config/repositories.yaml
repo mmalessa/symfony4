@@ -1,0 +1,18 @@
+parameters:
+    domain_repository_dbal.class: App\Infrastructure\Repository\DBAL\DbalDomainRepository
+    domain_repository_doctrine.class: App\Infrastructure\Repository\Doctrine\DoctrineDomainRepository
+
+services:
+    domain_repository:
+        alias: domain_repository.doctrine
+        public: true
+
+    domain_repository.dbal:
+        class: "%domain_repository_dbal.class%"
+        arguments: ["@database_connection"]
+        public: false
+
+    domain_repository.doctrine:
+        class: "%domain_repository_doctrine.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+        public: false
