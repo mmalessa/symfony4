@@ -7,16 +7,6 @@ services:
             - { name: tactician.handler, command: App\Application\Command\AddDomain }
         public: true
 
-
-    add_domain_handler_noflush:
-            class: App\Application\Command\Handler\AddDomainHandler
-            arguments:
-                $domainRepository: '@domain_repository'
-            tags:
-                - { name: tactician.handler, command: App\Application\Command\AddDomain }
-            public: true
-
-
     delete_domain_handler:
         class: App\Application\Command\Handler\DeleteDomainHandler
         arguments:
@@ -24,7 +14,6 @@ services:
         tags:
             - { name: tactician.handler, command: App\Application\Command\DeleteDomain }
         public: true
-
 
     modify_domains_handler:
         class: App\Application\Command\Handler\ModifyDomainsHandler
