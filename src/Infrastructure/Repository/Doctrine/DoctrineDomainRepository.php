@@ -1,8 +1,8 @@
 <?php
 namespace App\Infrastructure\Repository\Doctrine;
 
-use App\Domain\DomainRepository;
-use App\Entity\Domain;
+use App\Domain\Repository\DomainRepository;
+use App\Domain\Entity\Domain;
 use Doctrine\ORM\EntityManager;
 
 class DoctrineDomainRepository implements DomainRepository
@@ -19,16 +19,21 @@ class DoctrineDomainRepository implements DomainRepository
         return $this->em->getRepository("App:Domain")->findOneById($id);
     }
 
-    public function save($id, $name, $groupId)
+    public function add($id, $name, $groupId)
     {
         $domain = $this->get($id);
         if ($domain === null) {
             $domain = new Domain();
         }
 
+        $group = null;
+        if ($groupId != null) {
+            $group = $this->em->getReference('App:Group', $groupId);
+        }
+
         $domain->setId($id);
         $domain->setName($name);
-        $domain->setGroupId($groupId);
+        $domain->setGroup($group);
 
         $this->em->persist($domain);
 //        $this->em->flush($domain);

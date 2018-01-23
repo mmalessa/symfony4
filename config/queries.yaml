@@ -1,7 +1,13 @@
 services:
 
     domain_query:
-        class: App\Query\DomainQuery
+        class: App\Infrastructure\Query\DBAL\DbalDomainQuery
+        arguments:
+            $connection: '@database_connection'
+        public: true
+
+    group_query:
+        class: App\Infrastructure\Query\DBAL\DbalGroupQuery
         arguments:
             $connection: '@database_connection'
         public: true

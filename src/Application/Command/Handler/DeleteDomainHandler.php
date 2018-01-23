@@ -2,7 +2,7 @@
 namespace App\Application\Command\Handler;
 
 use App\Application\Command\DeleteDomain;
-use App\Domain\DomainRepository;
+use App\Domain\Repository\DomainRepository;
 
 class DeleteDomainHandler
 {

@@ -2,7 +2,7 @@
 namespace App\Application\Command\Handler;
 
 use App\Application\Command\AddDomain;
-use App\Domain\DomainRepository;
+use App\Domain\Repository\DomainRepository;
 
 
 class AddDomainHandler
@@ -16,7 +16,7 @@ class AddDomainHandler
 
     public function handle(AddDomain $addDomain)
     {
-        $this->domainRepository->save(
+        $this->domainRepository->add(
             $addDomain->getId(),
             $addDomain->getName(),
             $addDomain->getGroupId()

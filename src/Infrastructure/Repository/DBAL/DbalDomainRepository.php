@@ -1,7 +1,7 @@
 <?php
 namespace App\Infrastructure\Repository\DBAL;
 
-use App\Domain\DomainRepository;
+use App\Domain\Repository\DomainRepository;
 use Doctrine\DBAL\Connection;
 
 class DbalDomainRepository implements DomainRepository
@@ -15,12 +15,15 @@ class DbalDomainRepository implements DomainRepository
 
     public function get($id)
     {
-        $stmt = $this->connection->prepare("SELECT * FROM domain WHERE id = :id");
+        $stmt = $this->connection->prepare("SELECT d.id, d.name AS domainName, g.name AS groupName   
+          FROM domain d
+          LEFT JOIN group g ON d.group_id = g.id 
+          WHERE id = :id");
         $stmt->bindValue('id', $id);
         return $stmt->fetch();
     }
 
-    public function save($id, $name, $groupId)
+    public function add($id, $name, $groupId)
     {
         $stmt = $this->connection->prepare("INSERT INTO `domain` (`id`, `name`, `group_id`) 
             VALUES (:Id, :Name, :GroupId) 

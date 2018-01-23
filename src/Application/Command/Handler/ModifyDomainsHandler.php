@@ -3,7 +3,6 @@ namespace App\Application\Command\Handler;
 
 use App\Application\Command\AddDomain;
 use App\Application\Command\ModifyDomains;
-use Doctrine\ORM\EntityManager;
 
 
 class ModifyDomainsHandler
@@ -18,8 +17,10 @@ class ModifyDomainsHandler
     public function handle(ModifyDomains $modifyDomains)
     {
         $ids = $modifyDomains->getIds();
+        $groupId = $modifyDomains->getGroupId();
         foreach ($ids as $id) {
-            $addDomain = new AddDomain($id, 'http://www.modified' . rand(100,999) . '.com', rand(10,99));
+
+            $addDomain = new AddDomain($id, 'http://www.modified' . rand(100,999) . '.com', $groupId);
             $this->addDomainHandler->handle($addDomain);
         }
     }

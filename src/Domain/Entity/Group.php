@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DomainRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  */
-class Domain
+class Group
 {
     /**
      * @ORM\Id
@@ -20,10 +20,7 @@ class Domain
      */
     private $name;
 
-    /**
-     * @ORM\Column(name="group_id", type="integer")
-     **/
-    private $groupId;
+
 
     /**
      * @return mixed
@@ -56,23 +53,5 @@ class Domain
     {
         $this->name = $name;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
-
-    /**
-     * @param mixed $groupId
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-    }
-
-
 
 }
