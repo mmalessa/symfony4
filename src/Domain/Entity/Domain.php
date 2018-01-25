@@ -22,10 +22,16 @@ class Domain
     private $name;
 
     /**
+     * @ORM\Column(type="status_id", length=32)
+     */
+    private $statusId;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Group", inversedBy="domain")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      **/
     private $Group;
+
 
     /**
      * @return mixed
@@ -75,6 +81,22 @@ class Domain
         $this->Group = $group;
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getStatusId()
+    {
+        return $this->statusId;
+    }
+
+    /**
+     * @param mixed $statusId
+     */
+    public function setStatusId($statusId)
+    {
+        $this->statusId = $statusId;
+    }
 
 
 }
